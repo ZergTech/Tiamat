@@ -2,9 +2,9 @@ spring:
   datasource:
     druid:
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://g1-off-ku-qa.dns.guazi.com:3324/xinche_after_violation?useUnicode=true&characterEncoding=UTF-8
-      username: luyushuang
-      password: e4488143
+      url: jdbc:mysql://db.w0rm.cc:3306/tiamat?useUnicode=true&characterEncoding=UTF-8
+      username: w0rm
+      password: xuyang1001
       initialSize: 5
       minIdle: 5
       maxActive: 50
