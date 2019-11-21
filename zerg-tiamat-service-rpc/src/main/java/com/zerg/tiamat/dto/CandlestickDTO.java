@@ -83,18 +83,4 @@ public class CandlestickDTO implements Serializable {
     public void setVol(Double vol) {
         this.vol = vol;
     }
-
-    @Override
-    public String toString() {
-        return "CandlestickDTO{" +
-                "id=" + id +
-                ", amount=" + amount +
-                ", count=" + count +
-                ", open=" + open +
-                ", close=" + close +
-                ", low=" + low +
-                ", high=" + high +
-                ", vol=" + vol +
-                '}';
-    }
 }

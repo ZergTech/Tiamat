@@ -1,7 +1,7 @@
 package com.zerg.tiamat.service.rpc;
 
-import com.zerg.tiamat.dto.DataSourceDTO;
-import com.zerg.tiamat.dto.OperateDTO;
+import com.zerg.tiamat.dto.ActionDTO;
+import com.zerg.tiamat.dto.StatementDTO;
 
 /**
  * @author : xuyang
@@ -11,8 +11,8 @@ import com.zerg.tiamat.dto.OperateDTO;
 public interface DataModelService {
     /**
      * 数据通用接口
-     * @param dataSourceDTO
+     * @param dataDTO
      * @return
      */
-    OperateDTO operate(DataSourceDTO dataSourceDTO);
+    ActionDTO calc(StatementDTO dataDTO);
 }

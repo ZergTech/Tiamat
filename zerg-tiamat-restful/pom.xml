@@ -20,7 +20,48 @@
             <groupId>com.zerg</groupId>
             <artifactId>zerg-tiamat-service</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+
     </dependencies>
 
-
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <!--<resources>-->
+        <!--<resource>-->
+        <!--<directory>src/main/resources</directory>-->
+        <!--&lt;!&ndash; 资源根目录排除各环境的配置，使用单独的资源目录来指定 &ndash;&gt;-->
+        <!--<excludes>-->
+        <!--<exclude>test/*</exclude>-->
+        <!--<exclude>prod/*</exclude>-->
+        <!--<exclude>dev/*</exclude>-->
+        <!--<exclude>config/*</exclude>-->
+        <!--</excludes>-->
+        <!--</resource>-->
+        <!--<resource>-->
+        <!--<directory>src/main/resources/${profiles.active}</directory>-->
+        <!--<targetPath>config</targetPath>-->
+        <!--</resource>-->
+        <!--</resources>-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.zerg.tiamat.AppRun</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

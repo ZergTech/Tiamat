@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    druid:
+      driverClassName: com.mysql.jdbc.Driver
+      url: jdbc:mysql://g1-off-ku-qa.dns.guazi.com:3324/xinche_after_violation?useUnicode=true&characterEncoding=UTF-8
+      username: luyushuang
+      password: e4488143
+      initialSize: 5
+      minIdle: 5
+      maxActive: 50
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: wall,stat
+
+      web-stat-filter:
+        enabled: false
+      stat-view-servlet:
+        enabled: false

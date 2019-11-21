@@ -1,0 +1,16 @@
+server:
+  port: 9001
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.zerg.**.bean
+
+spring:
+  profiles:
+    active: dev
+  session:
+    store-type: none
+#  jackson:
+#    generator:
+#      write_numbers_as_strings: true
+
