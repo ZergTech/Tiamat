@@ -6,13 +6,7 @@ import lombok.ToString;
 
 import java.util.Map;
 
-/**
- * Created by IntelliJ IDEA.
- * User: luyushuang
- * Date: 2018/3/31
- * Time: 下午3:50
- * Description: No Description
- */
+
 @Getter
 @Setter
 @ToString

@@ -10,18 +10,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
-/**
- * FileName : WebConfig
- * <p>
- * ProjectName : xinche-after-insurance
- * <p>
- * PackageName : com.maodou.after.insurance.config
- * <p>
- *
- * @author : daisenrong
- * @version : 1.0.0
- * @date : 2018/12/21 15:42
- */
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 

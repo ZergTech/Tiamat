@@ -8,9 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.function.Consumer;
 
-/**
- * 文件工具类
- */
+
 @Slf4j
 public class FileUtils {
     private static final int byteArrayLenght = 8192;

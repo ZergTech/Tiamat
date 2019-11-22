@@ -5,15 +5,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-/**
- * SpringContextHolder<p>
- * 代码描述<p>
- * Copyright: Copyright (C) 2019 XXX, Inc. All rights reserved. <p>
- * Company: 金瓜子科技发展（北京）有限公司<p>
- *
- * @author czzhang
- * @since 2019/1/14 21:02
- */
 @Component
 public class SpringContextHolder implements ApplicationContextAware {
     private static ApplicationContext applicationContext = null;
