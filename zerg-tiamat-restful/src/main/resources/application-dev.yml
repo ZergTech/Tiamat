@@ -2,7 +2,7 @@ spring:
   datasource:
     druid:
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://db.w0rm.cc:3306/com.zerg.tiamat?useUnicode=true&characterEncoding=UTF-8
+      url: jdbc:mysql://db.w0rm.cc:3306/tiamat?useUnicode=true&characterEncoding=UTF-8
       username: w0rm
       password: xuyang1001
       initialSize: 5

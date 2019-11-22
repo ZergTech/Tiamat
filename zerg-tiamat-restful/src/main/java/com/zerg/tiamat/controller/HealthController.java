@@ -1,11 +1,14 @@
 package com.zerg.tiamat.controller;
 
+import com.zerg.tiamat.common.http.response.BaseResponse;
+import com.zerg.tiamat.service.local.HealthCheckService;
 import io.swagger.annotations.Api;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
 @Log4j2
@@ -16,6 +19,9 @@ public class HealthController {
 
     private static final int STATUS = 200;
     private static final String RETURN_MSG = "ok";
+
+    @Resource
+    private HealthCheckService healthCheck;
 
     @GetMapping("/healthCheck")
     public String healthCheck(HttpServletResponse response){
@@ -35,6 +41,11 @@ public class HealthController {
         log.info("==================== readinessCheck ====================");
         response.setStatus(STATUS);
         return RETURN_MSG;
+    }
+
+    @GetMapping("/test")
+    public BaseResponse<String> test(){
+        return BaseResponse.success(healthCheck.healthCheck());
     }
 
 }
