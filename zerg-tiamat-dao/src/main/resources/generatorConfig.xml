@@ -50,7 +50,7 @@
         <!-- 指定数据库表 -->
 
 
-<!--        <table schema="" tableName="violation_task"></table>-->
+        <table schema="" tableName="%"></table>
 
     </context>
 </generatorConfiguration>

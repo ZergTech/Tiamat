@@ -3,7 +3,7 @@
 
     <properties>
         <property name="group">zerg</property>
-        <property name="project">zerg-tiamat</property>
+        <property name="project">zerg-com.zerg.tiamat</property>
         <property name="invLogHome">/log/apps</property>
         <property name="logHome">${invLogHome}/${group}/${project}</property>
     </properties>
