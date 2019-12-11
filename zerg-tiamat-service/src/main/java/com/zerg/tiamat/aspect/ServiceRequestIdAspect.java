@@ -11,19 +11,6 @@ import org.slf4j.MDC;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/**
- * FileName : ServiceRequestIdAspect
- * <p>
- * ProjectName : xinche-after-insurance
- * <p>
- * PackageName : com.maodou.after.insurance.aspect
- * <p>
- * Description : 给日志添加requestId，主要是针对rpc调用
- *
- * @author : daisenrong
- * @version : 1.0.0
- * @date : 2018/11/16 22:32
- */
 @Aspect
 @Order(-10)
 @Component

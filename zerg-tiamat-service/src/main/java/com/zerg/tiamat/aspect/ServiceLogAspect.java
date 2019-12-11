@@ -10,19 +10,6 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-/**
- * FileName : ServiceLogAspect
- * <p>
- * ProjectName : xinche-after-insurance
- * <p>
- * PackageName : com.maodou.after.insurance.aspect
- * <p>
- * Description : service层切面日志
- *
- * @author : daisenrong
- * @version : 1.0.0
- * @date : 2018/11/16 22:29
- */
 @Aspect
 @Slf4j
 @Order(0)

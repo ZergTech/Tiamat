@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Tiamat.iml" filepath="$PROJECT_DIR$/.idea/Tiamat.iml" />
-      <module fileurl="file://$PROJECT_DIR$/zerg-tiamat-common/zerg-tiamat-common.iml" filepath="$PROJECT_DIR$/zerg-tiamat-common/zerg-tiamat-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zerg-tiamat-common/tiamat-common.iml" filepath="$PROJECT_DIR$/zerg-tiamat-common/tiamat-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/zerg-tiamat-dao/zerg-tiamat-dao.iml" filepath="$PROJECT_DIR$/zerg-tiamat-dao/zerg-tiamat-dao.iml" />
       <module fileurl="file://$PROJECT_DIR$/zerg-tiamat-restful/zerg-tiamat-restful.iml" filepath="$PROJECT_DIR$/zerg-tiamat-restful/zerg-tiamat-restful.iml" />
       <module fileurl="file://$PROJECT_DIR$/zerg-tiamat-service/zerg-tiamat-service.iml" filepath="$PROJECT_DIR$/zerg-tiamat-service/zerg-tiamat-service.iml" />

@@ -17,12 +17,11 @@ public class BaseResponse<T> implements Serializable {
     private String message;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    private PageInfo pageInfo;
+
     private boolean isSuccess = false;
 
     public BaseResponse(ResultStatusEnum responseCodeEnum) {
-        this(responseCodeEnum.getCode(),responseCodeEnum.getMessage());
+        this(responseCodeEnum.getCode(), responseCodeEnum.getMessage());
     }
 
     public BaseResponse(ResultStatusEnum responseCodeEnum, T data) {
@@ -36,9 +35,6 @@ public class BaseResponse<T> implements Serializable {
     public BaseResponse(T data) {
         this(ResultStatusEnum.SUCCESS.getCode(), ResultStatusEnum.SUCCESS.getMessage(), data);
     }
-    public BaseResponse(T data, PageInfo pageInfo) {
-        this(ResultStatusEnum.SUCCESS.getCode(), ResultStatusEnum.SUCCESS.getMessage(), data,pageInfo);
-    }
 
     public BaseResponse(Integer code, String message) {
         this.code = code;
@@ -46,12 +42,8 @@ public class BaseResponse<T> implements Serializable {
     }
 
     public BaseResponse(Integer code, String message, T data) {
-        this(code,message);
+        this(code, message);
         this.data = data;
-    }
-    public BaseResponse(Integer code, String message, T data, PageInfo pageInfo) {
-        this(code,message,data);
-        this.pageInfo=pageInfo;
     }
 
     /****************************** 执行成功 ******************************/
@@ -64,12 +56,6 @@ public class BaseResponse<T> implements Serializable {
 
     public static <R> BaseResponse<R> success(R data) {
         BaseResponse<R> res = new BaseResponse<R>(ResultStatusEnum.SUCCESS, data);
-        res.setIsSuccess(true);
-        return res;
-    }
-
-    public static <R> BaseResponse<R> success(R data, PageInfo pageInfo) {
-        BaseResponse<R> res = new BaseResponse<R>(data, pageInfo);
         res.setIsSuccess(true);
         return res;
     }

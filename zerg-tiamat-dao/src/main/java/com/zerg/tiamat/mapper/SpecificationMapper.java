@@ -3,8 +3,10 @@ package com.zerg.tiamat.mapper;
 import com.zerg.tiamat.dao.Specification;
 import com.zerg.tiamat.dao.SpecificationExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+@Mapper
 public interface SpecificationMapper {
     long countByExample(SpecificationExample example);
 

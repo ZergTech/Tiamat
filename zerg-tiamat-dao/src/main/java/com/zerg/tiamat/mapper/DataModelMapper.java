@@ -3,8 +3,11 @@ package com.zerg.tiamat.mapper;
 import com.zerg.tiamat.dao.DataModel;
 import com.zerg.tiamat.dao.DataModelExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface DataModelMapper {
     long countByExample(DataModelExample example);
 

@@ -8,7 +8,7 @@ import com.zerg.tiamat.dto.StatementDTO;
  * @date : 2019-11-20 18:31
  */
 
-public interface DataModelService {
+public interface DataModelRpcService {
     /**
      * 数据通用接口
      * @param dataDTO

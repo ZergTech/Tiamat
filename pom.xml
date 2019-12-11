@@ -5,17 +5,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zerg</groupId>
-    <artifactId>zerg-com.zerg.tiamat</artifactId>
+    <artifactId>zerg-tiamat</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
-    <modules>
-        <module>zerg-com.zerg.tiamat-restful</module>
-        <module>zerg-com.zerg.tiamat-service-rpc</module>
-        <module>zerg-com.zerg.tiamat-service</module>
-        <module>zerg-com.zerg.tiamat-dao</module>
-        <module>zerg-com.zerg.tiamat-common</module>
-    </modules>
 
+    <modules>
+        <module>zerg-tiamat-common</module>
+        <module>zerg-tiamat-dao</module>
+        <module>zerg-tiamat-restful</module>
+        <module>zerg-tiamat-service</module>
+        <module>zerg-tiamat-service-rpc</module>
+    </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -360,31 +360,31 @@
 
             <dependency>
                 <groupId>com.zerg</groupId>
-                <artifactId>zerg-com.zerg.tiamat-service-rpc</artifactId>
+                <artifactId>zerg-tiamat-service-rpc</artifactId>
                 <version>${version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zerg</groupId>
-                <artifactId>zerg-com.zerg.tiamat-common</artifactId>
+                <artifactId>zerg-tiamat-common</artifactId>
                 <version>${version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zerg</groupId>
-                <artifactId>zerg-com.zerg.tiamat-dao</artifactId>
+                <artifactId>zerg-tiamat-dao</artifactId>
                 <version>${version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zerg</groupId>
-                <artifactId>zerg-com.zerg.tiamat-service</artifactId>
+                <artifactId>zerg-tiamat-service</artifactId>
                 <version>${version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.zerg</groupId>
-                <artifactId>zerg-com.zerg.tiamat-restful</artifactId>
+                <artifactId>zerg-tiamat-restful</artifactId>
                 <version>${version}</version>
             </dependency>
 
