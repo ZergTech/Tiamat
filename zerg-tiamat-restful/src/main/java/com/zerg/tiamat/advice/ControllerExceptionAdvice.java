@@ -16,19 +16,19 @@ import javax.servlet.http.HttpServletResponse;
 public class ControllerExceptionAdvice {
     @ExceptionHandler(value = IllegalArgumentException.class)
     public BaseResponse illegalArgumentExceptionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) {
-        log.warn("IllegalArgumentException={}", e);
+        log.warn("IllegalArgumentException", e);
         return BaseResponse.fail(e.getMessage());
     }
 
     @ExceptionHandler(value = IllegalStateException.class)
     public BaseResponse illegalStateExceptionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) {
-        log.warn("IllegalStateException={}", e);
+        log.warn("IllegalStateException", e);
         return BaseResponse.fail(e.getMessage());
     }
 
     @ExceptionHandler(value = BizException.class)
     public BaseResponse bizExceptionHandler(Exception e, HttpServletRequest request, HttpServletResponse response) {
-        log.warn("BizException={}", e);
+        log.warn("BizException", e);
         return BaseResponse.fail(e.getMessage());
     }
 
@@ -39,7 +39,7 @@ public class ControllerExceptionAdvice {
             response.setContentType("application/json;charset=utf-8");
             response.setHeader("Content-Disposition", "");
         }
-        log.error("未捕获异常=====>{}", e);
+        log.error("未捕获异常=====>", e);
         return BaseResponse.fail();
     }
 
