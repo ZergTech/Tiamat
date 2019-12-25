@@ -110,5 +110,10 @@
             <groupId>com.zerg</groupId>
             <artifactId>zerg-tiamat-common</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.zerg</groupId>
+            <artifactId>zerg-egg-huobi</artifactId>
+        </dependency>
     </dependencies>
 </project>

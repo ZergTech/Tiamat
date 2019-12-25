@@ -2,7 +2,7 @@ spring:
   datasource:
     druid:
       driverClassName: com.mysql.jdbc.Driver
-      url: jdbc:mysql://db.w0rm.cc:3306/tiamat?useUnicode=true&characterEncoding=UTF-8
+      url: jdbc:mysql://sc.w0rm.cc:3306/tiamat?useUnicode=true&characterEncoding=UTF-8
       username: w0rm
       password: xuyang1001
       initialSize: 5
@@ -23,3 +23,14 @@ spring:
         enabled: false
       stat-view-servlet:
         enabled: false
+
+
+host:
+  server: https://sc.ftqq.com
+
+appkey:
+  server: SCU70956T0c15fbd0c9116e74a9e7e93fac9539ec5e0037cfebae0
+
+appsecret:
+  server:
+

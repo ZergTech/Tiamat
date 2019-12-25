@@ -14,3 +14,9 @@ spring:
 #    generator:
 #      write_numbers_as_strings: true
 
+request:
+  server:
+    url: ${host.server}/${appkey.server}.send
+    args:
+      appkey: ${appkey.server}
+    appsecret: ${appsecret.server}

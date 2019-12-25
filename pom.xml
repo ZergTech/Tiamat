@@ -15,6 +15,7 @@
         <module>zerg-tiamat-restful</module>
         <module>zerg-tiamat-service</module>
         <module>zerg-tiamat-service-rpc</module>
+        <module>zerg-egg-huobi</module>
     </modules>
 
     <properties>
@@ -53,6 +54,8 @@
         <poi.version>3.17</poi.version>
         <tomcat.version>9.0.13</tomcat.version>
         <easyexcel.version>1.1.2-beta5</easyexcel.version>
+
+        <mail.version>1.4</mail.version>
     </properties>
 
 
@@ -69,6 +72,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
     </dependencies>
 
@@ -311,6 +318,12 @@
 <!--            /////-->
 
             <dependency>
+                <groupId>javax.mail</groupId>
+                <artifactId>mail</artifactId>
+                <version>${mail.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp3.version}</version>
@@ -379,6 +392,12 @@
             <dependency>
                 <groupId>com.zerg</groupId>
                 <artifactId>zerg-tiamat-service</artifactId>
+                <version>${version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.zerg</groupId>
+                <artifactId>zerg-egg-huobi</artifactId>
                 <version>${version}</version>
             </dependency>
 

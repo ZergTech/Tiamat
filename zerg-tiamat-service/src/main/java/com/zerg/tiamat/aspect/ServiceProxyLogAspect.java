@@ -15,7 +15,7 @@ import java.util.Arrays;
 @Order(1)
 @Component
 public class ServiceProxyLogAspect {
-    @Pointcut("execution(public * com.zerg.tiamat.service..*RpcService.*(..))")
+    @Pointcut("execution(public * com.zerg.tiamat.service..*RpcServiceImpl.*(..))")
     public void serviceProxyPoint() {}
 
     @Around("serviceProxyPoint()")

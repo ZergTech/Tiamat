@@ -50,7 +50,7 @@
         <!-- 指定数据库表 -->
 
 
-        <table schema="" tableName="%"></table>
+        <table schema="" tableName="alarm"></table>
 
     </context>
 </generatorConfiguration>

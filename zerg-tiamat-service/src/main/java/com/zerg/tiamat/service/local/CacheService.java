@@ -1,7 +1,9 @@
 package com.zerg.tiamat.service.local;
 
+import com.zerg.tiamat.dao.Alarm;
 import com.zerg.tiamat.vo.DataModelVO;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -10,5 +12,11 @@ import java.util.List;
  */
 
 public interface CacheService {
-    List<DataModelVO> getSystemDataModel();
+    Collection<DataModelVO> getSystemDataModel();
+
+    Collection<Alarm> getAllAlarm();
+
+    Alarm getUserAlarm(String userEmail);
+
+    void updateAlarm();
 }

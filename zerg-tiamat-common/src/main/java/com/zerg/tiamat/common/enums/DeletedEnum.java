@@ -7,25 +7,25 @@ public enum DeletedEnum {
     /**
      * 正常
      */
-    UNDELETED((byte) 0, "未删除"),
+    UNDELETED(0, "未删除"),
     /**
      * 删除
      */
-    DELETED((byte) 1, "已删除");
+    DELETED( 1, "已删除");
 
-    private Byte code;
+    private Integer code;
     private String message;
 
-    public static DeletedEnum codeOf(byte code) {
+    public static DeletedEnum codeOf(Integer code) {
         return Arrays.stream(values()).filter(e -> e.getCode().equals(code)).findFirst().orElse(null);
     }
 
-    DeletedEnum(Byte code, String message) {
+    DeletedEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
 
-    public Byte getCode() {
+    public Integer getCode() {
         return code;
     }
 
