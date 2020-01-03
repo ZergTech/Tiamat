@@ -16,4 +16,6 @@ public interface AlarmService {
      */
     List<Alarm> getAllUser();
 
+    void updateSelectiveByEmail(Alarm alarm);
+
 }

@@ -4,10 +4,10 @@ import com.google.common.collect.Maps;
 import com.huobi.client.SubscriptionClient;
 import com.huobi.client.model.enums.CandlestickInterval;
 import com.huobi.client.model.event.CandlestickEvent;
-import com.zerg.tiamat.common.utils.DateTimeUtils;
 import com.zerg.tiamat.common.utils.ThreadUtils;
 import com.zerg.tiamat.dao.Alarm;
 import com.zerg.tiamat.dao.MonitorTask;
+import com.zerg.tiamat.entity.VolumeModel;
 import com.zerg.tiamat.service.dao.MonitorTaskService;
 import com.zerg.tiamat.service.local.CacheService;
 import com.zerg.tiamat.service.local.MessageFactory;
@@ -16,10 +16,11 @@ import com.zerg.tiamat.service.local.TemplateMessage;
 import com.zerg.tiamat.service.rpc.notify.NotifyRpcService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.scheduler.Schedulers;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.awt.event.KeyEvent;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -40,6 +41,9 @@ public class MonitorServiceImpl implements MonitorService {
     private static final Map<String, Long> LAST_SEND_EMAIL_MAP = Maps.newConcurrentMap();
     private static final SubscriptionClient SUBSCRIPTION_CLIENT = SubscriptionClient.create();
 
+    private static final VolumeModel VOLUME5 = new VolumeModel(5);
+    private static final VolumeModel VOLUME10 = new VolumeModel(10);
+
     @Resource
     private CacheService cacheService;
     @Resource
@@ -52,20 +56,22 @@ public class MonitorServiceImpl implements MonitorService {
     @PostConstruct
     public void init() {
         List<MonitorTask> allTask = monitorTaskService.getAllTask();
-
-        allTask.forEach(task -> {
-            Optional<CandlestickInterval> intervalOptional =
-                    CandlestickInterval.getEnum(task.getTimeInterval());
-
-            intervalOptional.ifPresent(candlestickInterval -> {
-                log.info("订阅任务，task:{}, interval:{}", task, candlestickInterval);
-                LAST_SEND_EMAIL_MAP.put(task.getSymbol() + "#" + task.getTimeInterval(), 0L);
-                SUBSCRIPTION_CLIENT.subscribeCandlestickEvent(
-                        task.getSymbol(),
-                        candlestickInterval,
-                        this::handleEvent);
-            });
-        });
+        Flux.fromStream(allTask.stream())
+                .flatMap(task ->
+                        Flux.create(sink -> {
+                            Optional<CandlestickInterval> intervalOptional =
+                                    CandlestickInterval.getEnum(task.getTimeInterval());
+                            intervalOptional.ifPresent(candlestickInterval -> {
+                                LAST_SEND_EMAIL_MAP.put(task.getSymbol() + "#" + task.getTimeInterval(), 0L);
+                                SUBSCRIPTION_CLIENT.subscribeCandlestickEvent(
+                                        task.getSymbol(),
+                                        candlestickInterval,
+                                        sink::next);
+                            });
+                        }))
+                .cast(CandlestickEvent.class)
+                .publishOn(Schedulers.newParallel("candlestickEven-parallel"))
+                .subscribe(this::handleEvent);
     }
 
     private void handleEvent(CandlestickEvent event) {
@@ -76,8 +82,9 @@ public class MonitorServiceImpl implements MonitorService {
         log.info("【接收到行情数据】key:{}, val:{}", key, event.getData());
         Long lastEmailTime = LAST_SEND_EMAIL_MAP.get(key);
         Long subs = Instant.now().toEpochMilli() - lastEmailTime;
-        if (subs <= event.getInterval().getIntervalMillSecond()
-                || subs <= GLOBAL_MIN_NOTIFY_TIMES) {
+
+        Long maxWaitTime = Math.min(GLOBAL_MIN_NOTIFY_TIMES, event.getInterval().getIntervalMillSecond());
+        if (subs <= maxWaitTime) {
             return;
         }
 
@@ -92,6 +99,36 @@ public class MonitorServiceImpl implements MonitorService {
         }
         BigDecimal shocks = sub.divide(open, 3, BigDecimal.ROUND_CEILING);
 
+        if (event.getInterval() == CandlestickInterval.HOUR4) {
+            VolumeModel.VolumeData volumeData = new VolumeModel.VolumeData();
+            volumeData.setTimestamp(event.getData().getTimestamp());
+            volumeData.setVolume(event.getData().getVolume());
+
+            if (VOLUME5.getLastTimestamp().compareTo(volumeData.getTimestamp()) < 0) {
+                VOLUME5.put(volumeData);
+            } else if (VOLUME5.getLastTimestamp().compareTo(volumeData.getTimestamp()) == 0) {
+                VOLUME5.replaceLast(volumeData);
+            }
+
+            if (VOLUME10.getLastTimestamp().compareTo(volumeData.getTimestamp()) < 0) {
+                VOLUME10.put(volumeData);
+            } else if (VOLUME10.getLastTimestamp().compareTo(volumeData.getTimestamp()) == 0) {
+                VOLUME10.replaceLast(volumeData);
+            }
+
+            if (VOLUME5.getAvg().compareTo(VOLUME10.getAvg()) > 0) {
+                ThreadUtils.executeWithoutWait(() -> cacheService.getAllAlarm().parallelStream()
+                        .forEach(alarm -> {
+                            if (canAlarm(alarm)) {
+                                LAST_SEND_EMAIL_MAP.put(key, Instant.ofEpochMilli(event.getTimestamp()).plus(8, ChronoUnit.HOURS).toEpochMilli());
+                                TemplateMessage message = messageFactory.getMessage(alarm, event);
+                                notifyRpcService.sendMessage(message.getSubject(), message.getMessage());
+                            }
+                        }));
+            }
+
+        }
+
         ThreadUtils.executeWithoutWait(() -> cacheService.getAllAlarm().parallelStream()
                 .forEach(alarm -> {
                     if (checkHighPrice(close, alarm)
@@ -102,6 +139,13 @@ public class MonitorServiceImpl implements MonitorService {
                         notifyRpcService.sendMessage(message.getSubject(), message.getMessage());
                     }
                 }));
+    }
+
+    private boolean canAlarm(Alarm alarm) {
+        if (alarm.getShockRange().compareTo(BigDecimal.ZERO) == 0) {
+            return false;
+        }
+        return true;
     }
 
     private boolean checkShcok(BigDecimal shocks, Alarm alarm) {

@@ -18,6 +18,16 @@ public class Candlestick {
   private BigDecimal high;
   private BigDecimal volume;
 
+  public Candlestick() {
+    amount = BigDecimal.ZERO;
+    count = 0L;
+    open = BigDecimal.ZERO;
+    close = BigDecimal.ZERO;
+    low = BigDecimal.ZERO;
+    high = BigDecimal.ZERO;
+    volume = BigDecimal.ZERO;
+  }
+
   /**
    * Get the UNIX formatted timestamp in UTC.
    *

@@ -17,6 +17,8 @@ import com.huobi.client.model.event.TradeEvent;
 import com.huobi.client.model.event.TradeStatisticsEvent;
 import com.huobi.client.model.request.OrdersRequest;
 
+import java.util.List;
+
 /***
  * The subscription client interface, it is used for subscribing any market data update and
  * account change, it is asynchronous, so you must implement the SubscriptionListener interface.
@@ -48,6 +50,12 @@ public interface SubscriptionClient {
   void subscribeCandlestickEvent(String symbols, CandlestickInterval interval,
       SubscriptionListener<CandlestickEvent> callback,
       SubscriptionErrorHandler errorHandler);
+
+  void subscribeCandlestickEvent(
+          List<String> symbols,
+          CandlestickInterval interval,
+          SubscriptionListener<CandlestickEvent> subscriptionListener,
+          SubscriptionErrorHandler errorHandler);
 
   /**
    * Request candlestick/kline event. If the candlestick/kline is received, server will send the data to client and onReceive in callback will be

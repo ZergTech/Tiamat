@@ -65,10 +65,12 @@ class WebsocketRequestImpl {
       CandlestickInterval interval,
       SubscriptionListener<CandlestickEvent> subscriptionListener,
       SubscriptionErrorHandler errorHandler) {
+
     InputChecker.checker()
         .checkSymbolList(symbols)
         .shouldNotNull(subscriptionListener, "listener")
         .shouldNotNull(interval, "CandlestickInterval");
+
     WebsocketRequest<CandlestickEvent> request =
         new WebsocketRequest<>(subscriptionListener, errorHandler);
     if (symbols.size() == 1) {

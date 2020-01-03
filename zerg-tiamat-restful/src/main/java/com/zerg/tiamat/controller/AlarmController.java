@@ -1,12 +1,11 @@
 package com.zerg.tiamat.controller;
 
 import com.zerg.tiamat.common.http.response.BaseResponse;
+import com.zerg.tiamat.dto.AlarmDTO;
 import com.zerg.tiamat.service.local.CacheService;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -27,6 +26,12 @@ public class AlarmController {
     @GetMapping("/updateAlarm")
     public BaseResponse updateAlarmCache(){
         cacheService.updateAlarm();
+        return BaseResponse.success();
+    }
+
+    @PostMapping("/updateAlarmByEmail")
+    public BaseResponse updateAlarm(@ModelAttribute AlarmDTO alarmDTO){
+        cacheService.updateAlarm(alarmDTO);
         return BaseResponse.success();
     }
 

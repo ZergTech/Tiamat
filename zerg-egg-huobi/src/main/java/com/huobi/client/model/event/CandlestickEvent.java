@@ -64,4 +64,14 @@ public class CandlestickEvent {
   public void setTimestamp(long timestamp) {
     this.timestamp = timestamp;
   }
+
+  @Override
+  public String toString() {
+    return "CandlestickEvent{" +
+            "symbol='" + symbol + '\'' +
+            ", timestamp=" + timestamp +
+            ", interval=" + interval +
+            ", data=" + data +
+            '}';
+  }
 }

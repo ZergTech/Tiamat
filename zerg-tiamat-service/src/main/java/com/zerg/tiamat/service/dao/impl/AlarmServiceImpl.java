@@ -27,11 +27,20 @@ public class AlarmServiceImpl implements AlarmService {
      */
     @Override
     public List<Alarm> getAllUser() {
-
         AlarmExample alarmExample = new AlarmExample();
         alarmExample.createCriteria()
                 .andDeletedEqualTo(DeletedEnum.UNDELETED.getCode());
 
         return alarmMapper.selectByExample(alarmExample);
+    }
+
+    @Override
+    public void updateSelectiveByEmail(Alarm alarm) {
+        AlarmExample alarmExample = new AlarmExample();
+        alarmExample.createCriteria()
+                .andMailAddressEqualTo(alarm.getMailAddress())
+                .andDeletedEqualTo(DeletedEnum.UNDELETED.getCode());
+
+        alarmMapper.updateByExampleSelective(alarm, alarmExample);
     }
 }
